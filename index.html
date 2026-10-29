@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>School Photo Gallery 2026-27</title>
+<title>ADW Schools Maintenance 2026-27</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;600&display=swap">
 <style>
-/* Same look as the Nallosai HMIS hostel gallery wireframe */
+/* Social Justice Department · Adi Dravidar Welfare Schools · School Maintenance 2026-27 */
 :root{
   --bg:#F4F5F7; --card:#fff; --fg:#17202A; --muted:#5B6672; --line:#D9DEE4; --input:#C9D0D8; --tile:#E6EAEE;
   --nav:#17202A; --nav-active:#2C3A4A; --nav-fg:#D5DCE4;
@@ -196,24 +196,129 @@ table.rep tr.sel td{background:var(--blue-soft)}
 .tab{border:0;background:none;font:600 13.5px var(--f);color:var(--muted);padding:7px 14px;border-radius:6px;cursor:pointer}
 .tab.on{background:#fff;color:var(--fg);box-shadow:0 1px 2px rgba(0,0,0,.08)}
 .tile.err{background:var(--tile)}
+
+/* ===== v2: branding, landing, guidance, priority ===== */
+header.bar .brand{display:flex;flex-direction:column;line-height:1.15}
+header.bar .brand b{font-size:15px;font-weight:700}
+header.bar .brand small{font-size:12px;font-weight:400;color:var(--nav-fg)}
+.who .lnk{background:none;border:1px solid #445468;color:#fff;border-radius:6px;padding:4px 10px;font:inherit;font-size:12.5px;cursor:pointer;margin-left:8px}
+
+/* landing */
+#vLogin{background:var(--bg)}
+.hero{background:var(--nav);color:#fff;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,rgba(255,255,255,.035) 0 2px,transparent 2px 22px);pointer-events:none}
+.hero-in{position:relative;max-width:1180px;margin:0 auto;padding:56px max(24px,env(safe-area-inset-right)) 64px max(24px,env(safe-area-inset-left));display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,400px);gap:48px;align-items:center}
+@media (max-width:860px){.hero-in{grid-template-columns:1fr;gap:28px;padding-top:36px;padding-bottom:40px}}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:#C8D3DF;font-weight:600}
+.eyebrow i{width:28px;height:2px;background:#F0B429;display:inline-block}
+.hero h1{font-size:clamp(30px,4.4vw,46px);line-height:1.08;margin:14px 0 10px;letter-spacing:-.01em;text-wrap:balance}
+.hero h1 span{color:#F0B429}
+.hero .lead{font-size:17px;line-height:1.55;color:#D5DCE4;max-width:56ch;margin:0}
+.hero .facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.hero .facts span{font-size:13px;border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:6px 12px;color:#E8EDF2}
+.login-card{background:#fff;color:var(--fg);border-radius:14px;padding:26px;box-shadow:0 18px 40px rgba(0,0,0,.28);display:flex;flex-direction:column;gap:14px}
+.login-card h2{margin:0;font-size:20px}
+.login-card p{margin:0;color:var(--muted);font-size:13px}
+.how{max-width:1180px;margin:0 auto;padding:36px max(24px,env(safe-area-inset-right)) 12px max(24px,env(safe-area-inset-left))}
+.how h3{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+.how ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:860px){.how ol{grid-template-columns:1fr}}
+.how li{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;gap:14px;align-items:flex-start}
+.how li .k{flex:none;width:34px;height:34px;border-radius:50%;background:var(--blue-soft);color:var(--accent-dk);display:flex;align-items:center;justify-content:center;font-weight:700}
+.how li b{display:block;font-size:15px;margin-bottom:4px}
+.how li small{color:var(--muted);font-size:13px;line-height:1.5}
+.lfoot{max-width:1180px;margin:0 auto;padding:22px max(24px,env(safe-area-inset-right)) 36px max(24px,env(safe-area-inset-left));color:var(--muted);font-size:12.5px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* progress checklist (JE school page) */
+.progress{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:760px){.progress{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.progress li{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}
+.progress li .n{flex:none;width:24px;height:24px;border-radius:50%;background:var(--tile);color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700}
+.progress li b{display:block;font-size:13.5px}
+.progress li small{display:block;font-size:12px;color:var(--muted);line-height:1.35}
+.progress li.ok .n{background:var(--ok);color:#fff}
+.progress li.now{border-color:var(--accent);box-shadow:0 0 0 2px var(--blue-soft)}
+.progress li.now .n{background:var(--accent);color:#fff}
+
+/* camera guidance */
+#cam .ct{display:flex;flex-direction:column;gap:10px}
+.cwhat b{display:block;font-size:14px;color:#fff}
+.cwhat span{display:block;font-size:12.5px;color:#C8D3DF;margin-top:2px}
+.csteps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+@media (max-width:640px){.csteps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.csteps li{display:flex;gap:8px;align-items:flex-start;background:rgba(255,255,255,.07);border-radius:8px;padding:7px 8px;min-width:0}
+.csteps li .n{flex:none;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700}
+.csteps li b{display:block;font-size:12.5px;color:#fff}
+.csteps li small{display:block;font-size:11.5px;color:#C8D3DF;line-height:1.3}
+.csteps li.ok .n{background:#2E9E5B}
+.csteps li.bad{background:rgba(220,70,60,.22)} .csteps li.bad .n{background:#D9483B}
+.csteps li.now{background:rgba(240,180,41,.2)} .csteps li.now .n{background:#F0B429;color:#17202A}
+.vwrap{position:relative;flex:1;min-height:0;display:flex}
+.vwrap video{flex:1;min-height:0;width:100%;object-fit:contain;background:#000}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+#flash.go{animation:flash .35s ease-out}
+@keyframes flash{0%{opacity:.85}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){#flash.go{animation:none}}
+.cmsg{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);background:rgba(23,32,42,.92);color:#fff;border-radius:10px;padding:10px 16px;font-size:14px;text-align:center;max-width:calc(100% - 32px);line-height:1.45}
+#camCount{width:90px;text-align:right;font-size:12px}
+
+/* reports: report-by, priority, danger */
+.rb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.hint0{margin:0;font-size:12.5px;color:var(--muted)}
+.sub2{font-size:11.5px;color:var(--muted)}
+td.ta{font-family:var(--f-ta)}
+.st.pri{background:#FDECEA;color:#B42318;font-weight:600}
+.st.non{background:var(--tile);color:var(--muted)}
+.prisel{min-height:32px;padding:4px 8px;font-size:13px;width:auto;border-radius:6px}
+.prisel.is-pri{border-color:#B42318;color:#B42318;font-weight:600;background:#FDF3F2}
+.prisel.is-non{color:var(--muted)}
+.wpri{display:flex;align-items:center;gap:12px}
+.kpis b small.q{color:var(--muted);font-size:12px;font-weight:400;display:block}
+section.danger{border-color:#F3C5BF}
+.dangerbtn{background:#fff;border-color:#B42318;color:#B42318}
+.dangerbtn:hover{background:#FDF3F2}
+.pwgrid{display:flex;flex-direction:column;gap:10px}
+.pwgrid h4{margin:6px 0 0;font-size:14px}
+.okmsg{color:var(--ok);font-size:13px;min-height:1em}
+.kpis{grid-template-columns:repeat(8,minmax(0,1fr))}
+@media (max-width:1100px){.kpis{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:560px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
 <body>
 <header class="bar">
-  <div class="brand">Nallosai HMIS</div>
-  <nav aria-label="Module"><a href="#" class="on" id="navLabel">School photo gallery</a></nav>
+  <div class="brand"><b>Social Justice Department</b><small>Adi Dravidar Welfare Schools</small></div>
+  <nav aria-label="Module"><a href="#" class="on" id="navLabel">School Maintenance</a></nav>
   <div class="who" id="who"></div>
 </header>
 
 <div id="vLogin" hidden>
-  <form class="login" id="loginForm">
-    <h1>Login</h1>
-    <p>School photo gallery &amp; proposed works 2026-27<br>JE: data collection · District / Master: reports and photos</p>
-    <label class="f">Username<input id="lUser" autocomplete="username" placeholder="e.g. je_ariyalur, dist_ariyalur or master"></label>
-    <label class="f">Password<input id="lPass" type="password" autocomplete="current-password"></label>
-    <div class="lerr" id="lErr"></div>
-    <button class="btn primary" id="lBtn" type="submit">Log in</button>
-  </form>
+  <div class="hero"><div class="hero-in">
+    <div>
+      <div class="eyebrow"><i></i>Social Justice Department</div>
+      <h1>Adi Dravidar Welfare Schools<br><span>Maintenance &amp; Photo Gallery</span></h1>
+      <p class="lead">Every school's condition and proposed maintenance works, recorded at the site with geo-tagged photos, and reviewed by district offices and the Directorate in one place.</p>
+      <div class="facts"><span>Academic year 2026-27</span><span>Geo-tagged, geo-fenced photos</span><span>District and category-wise reports</span></div>
+    </div>
+    <form class="login-card" id="loginForm">
+      <h2>Log in</h2>
+      <p>JE, District and Directorate logins</p>
+      <label class="f">Username<input id="lUser" autocomplete="username" placeholder="e.g. je_ariyalur"></label>
+      <label class="f">Password<input id="lPass" type="password" autocomplete="current-password"></label>
+      <div class="lerr" id="lErr"></div>
+      <button class="btn primary" id="lBtn" type="submit">Log in</button>
+      <p>Forgot your password? Ask the Directorate to reset it.</p>
+    </form>
+  </div></div>
+  <div class="how">
+    <h3>How it works</h3>
+    <ol>
+      <li><span class="k">1</span><span><b>JE records the school</b><small>At the school, the JE takes the photo gallery and before photos of each proposed work, with the estimated amount. Photos work only inside the school's 300 m boundary.</small></span></li>
+      <li><span class="k">2</span><span><b>District reviews</b><small>The district office sees every school's submission and photos, block-wise and category-wise, and follows up on pending schools.</small></span></li>
+      <li><span class="k">3</span><span><b>Directorate prioritises</b><small>The Directorate marks each work Priority or Non-priority and tracks works and amounts across all 38 districts.</small></span></li>
+    </ol>
+  </div>
+  <div class="lfoot"><span>Social Justice Department · Adi Dravidar Welfare Schools</span><span>School Maintenance &amp; Photo Gallery 2026-27</span></div>
 </div>
 
 
@@ -243,6 +348,8 @@ table.rep tr.sel td{background:var(--blue-soft)}
       <span class="pill am" id="pWorks">Proposed works 0 · photos 0</span>
     </div>
   </div>
+
+  <ol class="progress" id="progress"></ol>
 
   <section>
     <div class="shead"><h2>School info <span class="sub">– from school database</span></h2><div class="r" id="sdNote"></div></div>
@@ -287,9 +394,12 @@ table.rep tr.sel td{background:var(--blue-soft)}
 </main>
 
 <div id="cam" hidden>
-  <div class="ct"><b id="camWhat"></b><br><span id="gps" class="wait">Getting location…</span></div>
-  <video id="video" playsinline muted autoplay></video>
-  <div class="cb"><button class="btn" id="camCancel">Cancel</button><button id="shutter" aria-label="Capture photo" disabled></button><span id="camCount" style="width:70px;text-align:right;font-size:12px"></span></div>
+  <div class="ct">
+    <div class="cwhat"><b id="camWhat"></b><span id="camHint"></span></div>
+    <ol class="csteps" id="camSteps"></ol>
+  </div>
+  <div class="vwrap"><video id="video" playsinline muted autoplay></video><div id="flash"></div><div id="camMsg" class="cmsg" hidden></div></div>
+  <div class="cb"><button class="btn" id="camCancel">Cancel</button><button id="shutter" aria-label="Take photo" disabled></button><span id="camCount"></span></div>
 </div>
 <dialog id="dlg"><div class="dh"><span id="dlgT"></span><button class="btn small" id="dlgX">Close</button></div><div class="db" id="dlgB"></div></dialog>
 <div id="toast" hidden></div>
@@ -305,18 +415,21 @@ table.rep tr.sel td{background:var(--blue-soft)}
   <div class="kpis" id="kpis"></div>
 
   <section>
-    <div class="shead"><h2 id="absTitle">District abstract</h2><div class="r">Click a row to filter the lists below</div></div>
+    <div class="shead"><h2 id="absTitle">District abstract</h2>
+      <div class="rb"><span>Report by</span><div class="tabs" id="rbTabs"></div></div></div>
+    <p class="hint0">Click a row to filter the lists below.</p>
     <div class="tw"><table class="rep" id="abs"></table></div>
   </section>
 
   <section>
     <div class="shead">
-      <div class="tabs"><button class="tab on" data-tab="done" id="tDone">Submitted</button><button class="tab" data-tab="pend" id="tPend">Pending</button></div>
+      <div class="tabs" id="listTabs"><button class="tab on" data-tab="done" id="tDone">Submitted</button><button class="tab" data-tab="pend" id="tPend">Pending</button><button class="tab" data-tab="works" id="tWorks">Works &amp; priority</button></div>
       <button class="btn small" id="csvBtn">Download CSV</button>
     </div>
     <div class="filters">
       <select id="fDist"></select>
-      <input id="aSearch" placeholder="Search school name, UDISE, block or JE">
+      <select id="fPri" hidden><option value="">All works</option><option>Priority</option><option>Non-priority</option><option value="none">Not marked yet</option></select>
+      <input id="aSearch" placeholder="Search school name, UDISE, block, work or JE">
     </div>
     <div class="tw"><table class="rep" id="list"></table></div>
   </section>
@@ -329,6 +442,11 @@ table.rep tr.sel td{background:var(--blue-soft)}
   <section><div class="shead"><h2>Submission</h2></div><div class="sd" id="sResp"></div></section>
   <section><div class="shead"><h2>A. Photo gallery</h2><div class="r" id="gCount"></div></div><div class="gal" id="sGallery"></div></section>
   <section><div class="shead"><h2>B. Proposed maintenance works</h2><div class="r" id="wTotal"></div></div><div class="wcards" id="sWorks"></div></section>
+  <section class="danger" id="sDanger" hidden>
+    <div class="shead"><h2>Delete this response</h2></div>
+    <p class="hint0">Removes this school's submission from Responses, Gallery, Works, Photos and Priority so the JE can submit again. Photos stay in Google Drive. The deletion is recorded in the AuditLog tab.</p>
+    <div><button class="btn dangerbtn" id="delBtn">Delete response…</button></div>
+  </section>
 </main>
 
 
@@ -346,11 +464,42 @@ const APP=(()=>{
     set(v){try{localStorage.setItem("spg-session",JSON.stringify(v))}catch(e){}},del(){try{localStorage.removeItem("spg-session")}catch(e){}}};
   function show(v){VIEWS.forEach(x=>$(x).hidden=x!==v);window.scrollTo(0,0)}
   function setWho(u){
-    $("who").innerHTML=u?`${esc(u.name||u.username)} · ${esc(u.role==="MASTER"?"All districts":u.district)} <button id="logoutBtn">Log out</button>`:"";
+    $("who").innerHTML=u?`${esc(u.name||u.username)} · ${esc(u.role==="MASTER"?"All districts":u.district)} <button class="lnk" id="pwBtn">Change password</button><button class="lnk" id="logoutBtn">Log out</button>`:"";
     $("logoutBtn")?.addEventListener("click",()=>logout());
-    $("navLabel").textContent=!u?"School photo gallery":u.role==="JE"?"Data collection":"Reports & photos";
+    $("pwBtn")?.addEventListener("click",()=>pwDialog(u));
+    $("navLabel").textContent=!u?"School Maintenance":u.role==="JE"?"Data collection":"Reports & photos";
+    document.querySelector("header.bar").hidden=!u;
   }
   function logout(msg){store.del();setWho(null);show("vLogin");$("lErr").textContent=msg||""}
+  async function call(action,payload){const s=store.get();const r=await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify({action,token:s&&s.token,...payload})});const j=await r.json();if(j.auth){$("dlg").close();logout(j.error);throw new Error(j.error)}return j}
+  function pwDialog(u){
+    $("dlgT").textContent="Change password";
+    $("dlgB").innerHTML=`<form class="pwgrid" id="pwForm">
+        <label class="f">Current password<input id="pwOld" type="password" autocomplete="current-password"></label>
+        <label class="f">New password (at least 8 characters, letters and numbers)<input id="pwNew" type="password" autocomplete="new-password"></label>
+        <label class="f">Type the new password again<input id="pwNew2" type="password" autocomplete="new-password"></label>
+        <div class="lerr" id="pwErr"></div><div class="okmsg" id="pwOk"></div>
+        <div><button class="btn primary" type="submit">Change my password</button></div></form>
+      ${u.role==="MASTER"?`<form class="pwgrid" id="rsForm" style="border-top:1px solid var(--line);padding-top:12px">
+        <h4>Reset another login's password</h4>
+        <p style="margin:0;font-size:12.5px;color:var(--muted)">For a JE or district user who forgot theirs. Give them the new password, and ask them to change it after logging in.</p>
+        <label class="f">Username<input id="rsUser" placeholder="e.g. je_ariyalur" autocomplete="off"></label>
+        <label class="f">New password<input id="rsPw" autocomplete="off"></label>
+        <div class="lerr" id="rsErr"></div><div class="okmsg" id="rsOk"></div>
+        <div><button class="btn" type="submit">Reset password</button></div></form>`:""}`;
+    $("dlg").showModal();
+    $("pwForm").onsubmit=async e=>{e.preventDefault();$("pwErr").textContent="";$("pwOk").textContent="";
+      if($("pwNew").value!==$("pwNew2").value){$("pwErr").textContent="The two new passwords don't match.";return}
+      try{const j=await call("changePassword",{oldPassword:$("pwOld").value,newPassword:$("pwNew").value});
+        if(!j.ok){$("pwErr").textContent=j.error;return}
+        $("pwOk").textContent="Password changed. Use the new one next time you log in.";["pwOld","pwNew","pwNew2"].forEach(id=>$(id).value="")}
+      catch(err){$("pwErr").textContent=err.message||"Could not reach the server."}};
+    $("rsForm")&&($("rsForm").onsubmit=async e=>{e.preventDefault();$("rsErr").textContent="";$("rsOk").textContent="";
+      try{const j=await call("resetPassword",{username:$("rsUser").value.trim(),newPassword:$("rsPw").value});
+        if(!j.ok){$("rsErr").textContent=j.error;return}
+        $("rsOk").textContent=`Password for ${j.username} reset.`;$("rsPw").value=""}
+      catch(err){$("rsErr").textContent=err.message||"Could not reach the server."}});
+  }
   function start(t,u){store.set({token:t,user:u,at:Date.now()});setWho(u);(u.role==="JE"?JE:ADM).start(t,u)}
   $("loginForm").onsubmit=async e=>{
     e.preventDefault();$("lErr").textContent="";$("lBtn").disabled=true;$("lBtn").textContent="Checking…";
@@ -363,7 +512,7 @@ const APP=(()=>{
     finally{$("lBtn").disabled=false;$("lBtn").textContent="Log in"}
   };
   $("dlgX").onclick=()=>$("dlg").close();
-  function init(){const s=store.get();if(s&&s.token&&Date.now()-s.at<7.5*3600e3)start(s.token,s.user);else show("vLogin")}
+  function init(){const s=store.get();if(s&&s.token&&Date.now()-s.at<7.5*3600e3)start(s.token,s.user);else{setWho(null);show("vLogin")}}
   return {show,logout,init};
 })();
 
@@ -373,10 +522,16 @@ const JE=(()=>{
 const FENCE_DEFAULT_M=300, MIN_GPS_ACCURACY_M=50, MIN_WORK_PHOTOS=2, MAX_WORK_PHOTOS=5, PAINT_AFTER_YEARS=5;
 const THIS_YEAR=new Date().getFullYear();
 const GALLERY=[
-  {key:"entrance",label:"Entrance",req:true},{key:"front",label:"Full view",req:true},{key:"classroom",label:"Classroom",req:true},
-  {key:"toilet",label:"Other – Toilet block",req:false},{key:"water",label:"Other – Drinking water",req:false},
-  {key:"kitchen",label:"Other – Kitchen / Noon-meal",req:false},{key:"compound",label:"Other – Compound wall",req:false},
-  {key:"playground",label:"Other – Playground",req:false},{key:"lab",label:"Other – Lab / Library",req:false},{key:"other",label:"Other – Other",req:false}];
+  {key:"entrance",label:"Entrance",req:true,hint:"Stand at the gate so the school name board can be read."},
+  {key:"front",label:"Full view",req:true,hint:"Step back until the whole building fits in the frame."},
+  {key:"classroom",label:"Classroom",req:true,hint:"Show one classroom: floor, walls and roof."},
+  {key:"toilet",label:"Other – Toilet block",req:false,hint:"Show the toilet block and its present condition."},
+  {key:"water",label:"Other – Drinking water",req:false,hint:"Show the drinking water point or RO unit."},
+  {key:"kitchen",label:"Other – Kitchen / Noon-meal",req:false,hint:"Show the kitchen or noon-meal centre."},
+  {key:"compound",label:"Other – Compound wall",req:false,hint:"Show the compound wall, including any damage."},
+  {key:"playground",label:"Other – Playground",req:false,hint:"Show the playground."},
+  {key:"lab",label:"Other – Lab / Library",req:false,hint:"Show the lab or library."},
+  {key:"other",label:"Other – Other",req:false,hint:"Any other part of the school that needs attention."}];
 const AREAS=["Borewell","Drinking water / RO","Water tank","Pipeline","Septic tank","Toilets","Bathroom","Roof damage","Floor work","Classroom repair","Doors & windows","Kitchen / Noon-meal shed","Compound wall","Painting / Colour wash","Electrical","Student safety","Others"];
 
 /* ---------------- helpers ---------------- */
@@ -470,8 +625,8 @@ async function openSchool(udise){
 }
 
 /* ---------------- building upkeep ---------------- */
-$("washYear").onchange=()=>{upkeepUI();saveDraft()};
-["paintArea","paintCost"].forEach(id=>$(id).addEventListener("input",()=>{$(id).classList.remove("bad");saveDraft()}));
+$("washYear").onchange=()=>{upkeepUI();saveDraft();renderProgress()};
+["paintArea","paintCost"].forEach(id=>$(id).addEventListener("input",()=>{$(id).classList.remove("bad");saveDraft();renderProgress()}));
 function upkeepUI(){
   const v=$("washYear").value;$("washYear").classList.remove("bad");
   if(!v){$("upHint").textContent="Select the year of the last whitewashing / colour painting.";$("paint").hidden=true;return}
@@ -535,7 +690,7 @@ function renderWorks(){
       e.querySelector(".tile").onclick=()=>openCam({kind:"work",index:i});ph.appendChild(e)}
     c.querySelector("[data-rmw]")?.addEventListener("click",()=>askDelete(i));
     ["proposed","area","amount","site"].forEach(k=>{const el=c.querySelector(`#w${i}-${k}`);
-      el.addEventListener("input",()=>{w[k]=el.value;el.classList.remove("bad");if(k==="amount")totals();clearTimeout(saveDraft.h);saveDraft.h=setTimeout(saveDraft,600)})});
+      el.addEventListener("input",()=>{w[k]=el.value;el.classList.remove("bad");if(k==="amount")totals();else renderProgress();clearTimeout(saveDraft.h);saveDraft.h=setTimeout(saveDraft,600)})});
     box.appendChild(c);
   });
 }
@@ -551,39 +706,69 @@ function totals(){
   const g=Object.keys(gallery).length,wp=works.reduce((s,w)=>s+w.photos.length,0);
   $("pGallery").textContent=`Gallery ${g} / 10`;$("pGallery").className="pill"+(GALLERY.every(s=>!s.req||gallery[s.key])?" ok":"");
   $("pWorks").textContent=`Proposed works ${works.length} · photos ${wp}`;
+  renderProgress();
+}
+function renderProgress(){
+  if(!school)return;
+  const wy=$("washYear").value,paintOk=$("paint").hidden||(+$("paintArea").value>0&&+$("paintCost").value>0);
+  const reqDone=GALLERY.filter(s=>s.req&&gallery[s.key]?.status==="done").length,reqAll=GALLERY.filter(s=>s.req).length;
+  const wOk=w=>w.proposed.trim()&&w.area&&+w.amount>0&&w.site.trim()&&w.photos.filter(p=>p.status==="done").length>=MIN_WORK_PHOTOS;
+  const wDone=works.filter(wOk).length;
+  const steps=[
+    ["Building upkeep",wy&&paintOk,wy?(paintOk?"Done":"Enter painting area and cost"):"Select the last colour wash year"],
+    ["Photo gallery",reqDone===reqAll,`${reqDone} of ${reqAll} required photos saved`],
+    ["Proposed works",works.length&&wDone===works.length,`${wDone} of ${works.length} works complete`],
+  ];
+  const ready=steps.every(x=>x[1]);
+  steps.push(["Submit",submitted,submitted?"Submitted":ready?"Ready – tap Submit at the bottom":"Finish the steps above"]);
+  $("progress").innerHTML=steps.map(([t,ok,m],i)=>`<li class="${ok?"ok":i===steps.findIndex(x=>!x[1])?"now":""}"><span class="n">${ok?"✓":i+1}</span><span><b>${t}</b><small>${esc(m)}</small></span></li>`).join("");
 }
 function renderAll(){renderFence();renderGallery();renderWorks();totals()}
 function viewPhoto(p,title){$("dlgT").textContent=title;$("dlgB").innerHTML=`<img src="${p.full||p.thumb}" alt=""><div style="font-size:12.5px;color:var(--muted)">${ovText(p)} · GPS accuracy ±${p.acc} m</div><a class="btn small" style="align-self:flex-start;text-decoration:none" target="_blank" rel="noopener" href="https://www.google.com/maps?q=${p.lat},${p.lng}">Open location in map</a>`;$("dlg").showModal()}
 
-/* ---------------- camera: live capture only, geo-tagged, geo-fenced ---------------- */
-let stream=null,watchId=null,fix=null;
+/* ---------------- camera: live capture only, geo-tagged, geo-fenced, with step-by-step guidance ---------------- */
+let stream=null,watchId=null,fix=null,camState={camera:"wait",gps:"wait",fence:"wait"},taken=0;
 const targetName=t=>t.kind==="gallery"?`${GALLERY.findIndex(s=>s.key===t.slot)+1}. ${GALLERY.find(s=>s.key===t.slot).label}`:`${workId(t.index)} · before photo`;
-function gpsUI(){
-  const g=$("gps"),s=$("shutter");
-  if(!fix){g.className="wait";g.textContent="Getting location… keep GPS on";s.disabled=true;return}
-  if(fix.acc>MIN_GPS_ACCURACY_M){g.className="wait";g.textContent=`GPS accuracy ±${Math.round(fix.acc)} m – waiting for ±${MIN_GPS_ACCURACY_M} m. Move to an open area.`;s.disabled=true;return}
-  if(fence){const d=distM(fence,fix);
-    if(d>fenceM){g.className="bad";g.textContent=`Outside geo-fence: ${Math.round(d)} m from school (limit ${fenceM} m). Move inside the school.`;s.disabled=true;return}
-    g.className="ok";g.textContent=`Inside geo-fence · ${Math.round(d)} m from school · ±${Math.round(fix.acc)} m`;s.disabled=false;return}
-  g.className="ok";g.textContent=`Location ready ±${Math.round(fix.acc)} m · this photo sets the school point`;s.disabled=false;
+const targetHint=t=>t.kind==="gallery"?GALLERY.find(s=>s.key===t.slot).hint:`Show the problem clearly for: ${works[t.index].proposed.trim()||"this work"}. Take ${MIN_WORK_PHOTOS} to ${MAX_WORK_PHOTOS} photos from different sides.`;
+function renderSteps(){
+  const st=camState,dist=fix&&fence?Math.round(distM(fence,fix)):null;
+  const S=[
+    ["camera","Camera",st.camera==="ok"?"Camera is on":st.camera==="bad"?st.cameraMsg:"Opening the camera… allow it if the phone asks"],
+    ["gps","GPS location",st.gps==="ok"?`Location found (±${Math.round(fix.acc)} m)`:st.gps==="bad"?st.gpsMsg:fix?`Improving accuracy: ±${Math.round(fix.acc)} m, need ±${MIN_GPS_ACCURACY_M} m. Stand in an open area.`:"Finding your location… keep GPS on and allow location"],
+    ["fence","Inside school",st.fence==="ok"?(fence?`Inside the school boundary (${dist} m from school point)`:"This first photo will set the school location"):st.fence==="bad"?`You are ${dist} m from the school. Move within ${fenceM} m.`:"Waiting for GPS"],
+  ];
+  const ready=S.every(([k])=>st[k]==="ok");
+  S.push(["shoot","Take the photo",ready?"Ready: point at the subject and tap the white button":"The button turns on when steps 1–3 are ticked"]);
+  $("camSteps").innerHTML=S.map(([k,t,m],i)=>{const v=k==="shoot"?(ready?"now":"wait"):st[k];return `<li class="${v}"><span class="n">${v==="ok"?"✓":v==="bad"?"!":i+1}</span><span><b>${t}</b><small>${esc(m)}</small></span></li>`}).join("");
+  $("shutter").disabled=!ready;
 }
+function gpsUI(){
+  if(!fix){camState.gps="wait";camState.fence="wait"}
+  else if(fix.acc>MIN_GPS_ACCURACY_M){camState.gps="wait";camState.fence="wait"}
+  else{camState.gps="ok";camState.fence=fence&&distM(fence,fix)>fenceM?"bad":"ok"}
+  renderSteps();
+}
+function camMsg(html,ms){const m=$("camMsg");m.innerHTML=html;m.hidden=false;clearTimeout(camMsg.h);if(ms)camMsg.h=setTimeout(()=>m.hidden=true,ms)}
 async function openCam(t){
   if(!window.isSecureContext){toast("Camera and GPS need the page to be opened over HTTPS.");return}
   if(!navigator.mediaDevices?.getUserMedia||!navigator.geolocation){toast("This browser cannot open the camera. Use Google Chrome.");return}
-  camTarget=t;fix=null;$("cam").hidden=false;$("camWhat").textContent=`${targetName(t)} · ${school.name}`;
-  $("camCount").textContent=t.kind==="work"?`${works[t.index].photos.length+1} of ${MAX_WORK_PHOTOS}`:"";gpsUI();
+  camTarget=t;fix=null;taken=0;camState={camera:"wait",gps:"wait",fence:"wait"};$("cam").hidden=false;$("camMsg").hidden=true;
+  $("camWhat").textContent=`${targetName(t)} · ${school.name}`;$("camHint").textContent=targetHint(t);
+  $("camCancel").textContent="Cancel";
+  $("camCount").textContent=t.kind==="work"?`Photo ${works[t.index].photos.length+1} of ${MAX_WORK_PHOTOS}`:"";renderSteps();
   watchId=navigator.geolocation.watchPosition(p=>{fix={lat:p.coords.latitude,lng:p.coords.longitude,acc:p.coords.accuracy,ts:p.timestamp};gpsUI()},
-    err=>{$("gps").className="bad";$("gps").textContent=err.code===1?"Location permission denied. Allow location for this site and turn on GPS.":"Cannot get location. Turn on GPS.";$("shutter").disabled=true},
+    err=>{camState.gps="bad";camState.gpsMsg=err.code===1?"Location is blocked. Allow location for this site in Chrome settings and turn on GPS.":"Cannot get location. Turn on GPS and try again.";renderSteps()},
     {enableHighAccuracy:true,maximumAge:0,timeout:30000});
   try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"},width:{ideal:1920},height:{ideal:1080}},audio:false});
-    $("video").srcObject=stream;await $("video").play()}
-  catch(e){closeCam();toast(e.name==="NotAllowedError"?"Camera permission denied. Allow camera for this site.":"Could not open the camera.")}
+    $("video").srcObject=stream;await $("video").play();camState.camera="ok";renderSteps()}
+  catch(e){camState.camera="bad";camState.cameraMsg=e.name==="NotAllowedError"?"Camera is blocked. Allow camera for this site in Chrome settings.":"Could not open the camera.";renderSteps()}
 }
-function closeCam(){stream?.getTracks().forEach(t=>t.stop());stream=null;if(watchId!=null)navigator.geolocation.clearWatch(watchId);watchId=null;$("cam").hidden=true}
+function closeCam(){stream?.getTracks().forEach(t=>t.stop());stream=null;if(watchId!=null)navigator.geolocation.clearWatch(watchId);watchId=null;$("cam").hidden=true;
+  if(taken)toast(`${taken} photo${taken>1?"s":""} taken. Each shows "Saving…" until it reaches Google Drive, then "Saved".`,4500)}
 $("camCancel").onclick=closeCam;
 $("shutter").onclick=()=>{
   const v=$("video");if(!fix||!v.videoWidth)return;
-  if(Date.now()-fix.ts>60000){toast("Location is old. Wait a moment.");return}
+  if(Date.now()-fix.ts>60000){camMsg("Location is old. Wait a moment for a fresh GPS reading.",3000);return}
   const f={...fix},t=camTarget;
   const sc=Math.min(1,1280/Math.max(v.videoWidth,v.videoHeight)),W=Math.round(v.videoWidth*sc),H=Math.round(v.videoHeight*sc);
   const c=document.createElement("canvas");c.width=W;c.height=H;const x=c.getContext("2d");x.drawImage(v,0,0,W,H);
@@ -597,12 +782,17 @@ $("shutter").onclick=()=>{
   const full=c.toDataURL("image/jpeg",.78);
   const th=document.createElement("canvas");th.width=360;th.height=Math.round(360*H/W);th.getContext("2d").drawImage(c,0,0,th.width,th.height);
   const p={lat:+f.lat.toFixed(6),lng:+f.lng.toFixed(6),acc:Math.round(f.acc),dist,capturedAt:now.toISOString(),time,thumb:th.toDataURL("image/jpeg",.65),full,status:"up"};
-  let ref;
+  let ref;taken++;
+  const fl=$("flash");fl.classList.remove("go");void fl.offsetWidth;fl.classList.add("go");
   if(!fence)fence={lat:p.lat,lng:p.lng,source:"photo"};   // provisional until the server confirms
-  if(t.kind==="gallery"){gallery[t.slot]=p;ref={kind:"gallery",slot:t.slot};closeCam()}
+  if(t.kind==="gallery"){gallery[t.slot]=p;ref={kind:"gallery",slot:t.slot};
+    camMsg(`<b>✓ Photo taken</b><br>Saving it to Google Drive. Closing the camera…`);setTimeout(closeCam,900)}
   else{const w=works[t.index];w.photos.push(p);ref={kind:"work",workKey:w.key};
-    if(w.photos.length>=MAX_WORK_PHOTOS)closeCam();else $("camCount").textContent=`${w.photos.length+1} of ${MAX_WORK_PHOTOS}`}
-  toast("Photo captured",1400);renderAll();uploadPhoto(ref,p);
+    const n=w.photos.length,need=Math.max(0,MIN_WORK_PHOTOS-n);
+    if(n>=MAX_WORK_PHOTOS){camMsg(`<b>✓ Photo ${n} taken</b><br>That's the maximum of ${MAX_WORK_PHOTOS}. Closing the camera…`);setTimeout(closeCam,1100)}
+    else{camMsg(`<b>✓ Photo ${n} taken</b><br>${need?`Take ${need} more for this work.`:`Minimum done. Take more, or tap <b>Done</b>.`}`,3500);
+      $("camCount").textContent=`Photo ${n+1} of ${MAX_WORK_PHOTOS}`;$("camCancel").textContent="Done"}}
+  renderAll();uploadPhoto(ref,p);
 };
 async function uploadPhoto(ref,p){
   if(!p.full){toast("This photo is no longer on the phone. Remove it and capture again.");return}
@@ -616,6 +806,7 @@ async function uploadPhoto(ref,p){
       throw new Error(j.error);
     }
     p.fileId=j.fileId;p.dist=j.dist;p.status="done";if(j.fence)fence=j.fence;
+    if($("cam").hidden)toast("Photo saved to Google Drive ✓",1800);
   }catch(e){if(e.handled)return;p.status="fail";toast(e?.message&&e.message!=="Failed to fetch"?e.message:"Photo not saved. Check the network and tap Retry.")}
   saveDraft();renderAll();
 }
@@ -661,7 +852,7 @@ $("submitBtn").onclick=async()=>{
   try{
     const j=await api("submit",body,2);
     if(!j.ok)throw new Error(j.error||"Could not submit.");
-    submitted=true;ss.del(dkey());$("formArea").classList.add("disabled");$("errs").hidden=true;
+    submitted=true;ss.del(dkey());renderProgress();$("formArea").classList.add("disabled");$("errs").hidden=true;
     $("blocked").hidden=false;$("blocked").style.cssText="background:var(--ok-soft);color:var(--ok);border-color:#BFE3C9";
     $("blocked").innerHTML=`<b>Submitted.</b> Reference ${esc(j.ref)} · ${works.length} works · Rs. ${inr(sumAmt())} · ${Object.keys(g).length} gallery photos · ${esc(j.at)}`;
     const s=schools.find(x=>x.udise===school.udise);if(s)s.submitted={at:j.at,ref:j.ref};
@@ -685,7 +876,7 @@ const lakh=n=>(Number(n)||0)>=1e5?((n/1e5).toLocaleString("en-IN",{maximumFracti
 const toast=(m,ms=3800)=>{const t=$("toast");t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,ms)};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 
-let token=null,user=null,data=null,tab="done",distFilter="";
+let token=null,user=null,data=null,tab="done",distFilter="",reportBy="district",curSchool=null;
 async function api(action,payload={},tries=2){
   let last;
   for(let i=0;i<tries;i++){
@@ -702,46 +893,67 @@ const logout=m=>APP.logout(m);
 async function loadDash(){
   show("vDash");$("dTitle").textContent=user.role==="MASTER"?"All districts":user.district;$("dMeta").textContent="Loading report…";
   try{const j=await api("adminSummary");if(!j.ok){toast(j.error);return}data=j;
-    const keys=new Set([...j.submitted.map(r=>r.district),...j.pending.map(r=>r.district)]);
-    $("fDist").innerHTML=user.role==="MASTER"?`<option value="">All districts</option>`+[...keys].sort().map(d=>`<option>${esc(d)}</option>`).join(""):`<option value="">All blocks</option>`+[...new Set([...j.submitted.map(r=>r.block),...j.pending.map(r=>r.block)])].sort().map(b=>`<option>${esc(b)}</option>`).join("");
-    $("fDist").value=distFilter;renderDash()}
+    if(user.role!=="MASTER"&&reportBy==="district")reportBy="block";
+    $("rbTabs").innerHTML=(user.role==="MASTER"?[["district","District"],["block","Block"],["category","Category"]]:[["block","Block"],["category","Category"]])
+      .map(([k,l])=>`<button class="tab ${reportBy===k?"on":""}" data-rb="${k}">${l}</button>`).join("");
+    $("rbTabs").querySelectorAll("[data-rb]").forEach(b=>b.onclick=()=>{reportBy=b.dataset.rb;distFilter="";$("rbTabs").querySelectorAll("[data-rb]").forEach(x=>x.classList.toggle("on",x===b));fillGroupOptions();renderDash()});
+    fillGroupOptions();renderDash()}
   catch(e){if(!e.handled)$("dMeta").textContent="Could not load the report. Check the connection and press Refresh."}
 }
 $("refreshBtn").onclick=loadDash;
-const groupKey=r=>user.role==="MASTER"?r.district:r.block;
+const RB_LABEL={district:"District",block:"Block",category:"Category"};
+const groupKey=r=>reportBy==="district"?r.district:reportBy==="category"?(r.category||"Not given"):(user.role==="MASTER"?`${r.district} · ${r.block}`:r.block);
+function fillGroupOptions(){
+  const keys=[...new Set([...data.submitted,...data.pending].map(groupKey))].sort();
+  $("fDist").innerHTML=`<option value="">All ${RB_LABEL[reportBy].toLowerCase()==="category"?"categories":RB_LABEL[reportBy].toLowerCase()+"s"}</option>`+keys.map(k=>`<option>${esc(k)}</option>`).join("");
+  $("fDist").value=distFilter;
+}
 function renderDash(){
   const d=data,S=d.submitted,P=d.pending;
   $("dMeta").textContent=`School photo gallery & proposed works 2026-27 · updated ${d.generatedAt}`;
   const works=S.reduce((s,r)=>s+r.works,0),amt=S.reduce((s,r)=>s+r.amount,0),paint=S.reduce((s,r)=>s+r.paintCost,0),photos=S.reduce((s,r)=>s+r.gallery+r.workPhotos,0);
   const pct=d.totalSchools?Math.round(S.length*100/d.totalSchools):0;
-  $("kpis").innerHTML=[["Schools",d.totalSchools],["Submitted",`${S.length} <small>(${pct}%)</small>`],["Pending",P.length],["Proposed works",works],["Works amount (Rs.)",lakh(amt)],["Painting cost (Rs.)",lakh(paint)],["Photos",photos]]
+  const priW=S.reduce((s,r)=>s+r.priWorks,0),priA=S.reduce((s,r)=>s+r.priAmount,0),unm=S.reduce((s,r)=>s+r.unmarked,0);
+  $("kpis").innerHTML=[["Schools",d.totalSchools],["Submitted",`${S.length} <small>(${pct}%)</small>`],["Pending",P.length],["Proposed works",works],["Works amount (Rs.)",lakh(amt)],["Priority works",`${priW} <small class="q">${unm} not marked</small>`],["Priority amount (Rs.)",lakh(priA)],["Painting cost (Rs.)",lakh(paint)]]
     .map(([l,v])=>`<div><small>${l}</small><b>${v}</b></div>`).join("");
   // abstract
-  const g={};const add=(k)=>g[k]??={k,all:0,done:0,works:0,amt:0,paint:0,ph:0};
-  S.forEach(r=>{const x=add(groupKey(r));x.all++;x.done++;x.works+=r.works;x.amt+=r.amount;x.paint+=r.paintCost;x.ph+=r.gallery+r.workPhotos});
+  const g={};const add=(k)=>g[k]??={k,all:0,done:0,works:0,amt:0,paint:0,ph:0,pw:0,pa:0};
+  S.forEach(r=>{const x=add(groupKey(r));x.all++;x.done++;x.works+=r.works;x.amt+=r.amount;x.paint+=r.paintCost;x.ph+=r.gallery+r.workPhotos;x.pw+=r.priWorks;x.pa+=r.priAmount});
   P.forEach(r=>add(groupKey(r)).all++);
   const rows=Object.values(g).sort((a,b)=>String(a.k).localeCompare(String(b.k)));
-  const T=rows.reduce((a,x)=>({all:a.all+x.all,done:a.done+x.done,works:a.works+x.works,amt:a.amt+x.amt,paint:a.paint+x.paint,ph:a.ph+x.ph}),{all:0,done:0,works:0,amt:0,paint:0,ph:0});
-  $("absTitle").textContent=user.role==="MASTER"?"District abstract":"Block abstract";
+  const T=rows.reduce((a,x)=>({all:a.all+x.all,done:a.done+x.done,works:a.works+x.works,amt:a.amt+x.amt,paint:a.paint+x.paint,ph:a.ph+x.ph,pw:a.pw+x.pw,pa:a.pa+x.pa}),{all:0,done:0,works:0,amt:0,paint:0,ph:0,pw:0,pa:0});
+  $("absTitle").textContent=`${RB_LABEL[reportBy]}-wise abstract`;
   const bar=(d,a)=>{const p=a?Math.round(d*100/a):0;return `<div class="pbar"><i style="width:${p}%"></i></div><span class="pc">${p}%</span>`};
-  $("abs").innerHTML=`<thead><tr><th>${user.role==="MASTER"?"District":"Block"}</th><th class="n">Schools</th><th class="n">Submitted</th><th class="n">Pending</th><th>Progress</th><th class="n">Works</th><th class="n">Works amount (Rs.)</th><th class="n">Painting cost (Rs.)</th><th class="n">Photos</th></tr></thead>
-    <tbody>${rows.map(x=>`<tr class="click ${distFilter===x.k?"sel":""}" data-k="${esc(x.k)}"><td>${esc(x.k||"—")}</td><td class="n">${x.all}</td><td class="n">${x.done}</td><td class="n">${x.all-x.done}</td><td class="pg">${bar(x.done,x.all)}</td><td class="n">${x.works}</td><td class="n">${inr(x.amt)}</td><td class="n">${inr(x.paint)}</td><td class="n">${x.ph}</td></tr>`).join("")}</tbody>
-    <tfoot><tr><td>Total</td><td class="n">${T.all}</td><td class="n">${T.done}</td><td class="n">${T.all-T.done}</td><td class="pg">${bar(T.done,T.all)}</td><td class="n">${T.works}</td><td class="n">${inr(T.amt)}</td><td class="n">${inr(T.paint)}</td><td class="n">${T.ph}</td></tr></tfoot>`;
+  $("abs").innerHTML=`<thead><tr><th>${RB_LABEL[reportBy]}</th><th class="n">Schools</th><th class="n">Submitted</th><th class="n">Pending</th><th>Progress</th><th class="n">Works</th><th class="n">Works amount (Rs.)</th><th class="n">Priority works</th><th class="n">Priority amount (Rs.)</th><th class="n">Painting cost (Rs.)</th><th class="n">Photos</th></tr></thead>
+    <tbody>${rows.map(x=>`<tr class="click ${distFilter===x.k?"sel":""}" data-k="${esc(x.k)}"><td>${esc(x.k||"—")}</td><td class="n">${x.all}</td><td class="n">${x.done}</td><td class="n">${x.all-x.done}</td><td class="pg">${bar(x.done,x.all)}</td><td class="n">${x.works}</td><td class="n">${inr(x.amt)}</td><td class="n">${x.pw}</td><td class="n">${inr(x.pa)}</td><td class="n">${inr(x.paint)}</td><td class="n">${x.ph}</td></tr>`).join("")}</tbody>
+    <tfoot><tr><td>Total</td><td class="n">${T.all}</td><td class="n">${T.done}</td><td class="n">${T.all-T.done}</td><td class="pg">${bar(T.done,T.all)}</td><td class="n">${T.works}</td><td class="n">${inr(T.amt)}</td><td class="n">${T.pw}</td><td class="n">${inr(T.pa)}</td><td class="n">${inr(T.paint)}</td><td class="n">${T.ph}</td></tr></tfoot>`;
   $("abs").querySelectorAll("tr[data-k]").forEach(tr=>tr.onclick=()=>{distFilter=distFilter===tr.dataset.k?"":tr.dataset.k;$("fDist").value=distFilter;renderDash()});
   renderList();
 }
 function filtered(){
   const q=$("aSearch").value.trim().toLowerCase();
-  const src=tab==="done"?data.submitted:data.pending;
-  return src.filter(r=>(!distFilter||groupKey(r)===distFilter)&&(!q||[r.name,r.udise,r.block,r.je].some(v=>String(v||"").toLowerCase().includes(q))));
+  const src=tab==="done"?data.submitted:tab==="pend"?data.pending:data.works;
+  const pf=$("fPri").value;
+  return src.filter(r=>(!distFilter||groupKey(r)===distFilter)&&(!q||[r.name,r.udise,r.block,r.je,r.workId,r.proposed,r.area].some(v=>String(v||"").toLowerCase().includes(q)))
+    &&(tab!=="works"||!pf||(pf==="none"?!r.priority:r.priority===pf)));
 }
 function renderList(){
   const rows=filtered();
-  $("tDone").textContent=`Submitted (${data.submitted.length})`;$("tPend").textContent=`Pending (${data.pending.length})`;
+  $("tDone").textContent=`Submitted (${data.submitted.length})`;$("tPend").textContent=`Pending (${data.pending.length})`;$("tWorks").textContent=`Works & priority (${data.works.length})`;
+  $("fPri").hidden=tab!=="works";
+  const M=user.role==="MASTER";
+  if(tab==="works"){
+    $("list").innerHTML=`<thead><tr><th>Work ID</th><th>School</th>${M?"<th>District</th>":""}<th>Block</th><th>Category</th><th>Proposed work</th><th>Work area</th><th class="n">Amount (Rs.)</th><th>Priority</th></tr></thead>
+    <tbody>${rows.length?rows.map(w=>`<tr><td class="nw">${esc(w.workId)}</td><td>${esc(w.name)}<div class="sub2">${esc(w.udise)}</div></td>${M?`<td>${esc(w.district)}</td>`:""}<td>${esc(w.block)}</td><td>${esc(w.category)}</td><td class="ta">${esc(w.proposed)}</td><td>${esc(w.area)}</td><td class="n">${inr(w.amount)}</td>
+      <td>${M?priSelect(w):priBadge(w.priority)}</td></tr>`).join("")
+      :`<tr><td colspan="9" class="empty">No works${distFilter||$("aSearch").value||$("fPri").value?" match the filter":" submitted yet"}.</td></tr>`}</tbody>`;
+    bindPriSelects($("list"));
+    return;
+  }
   if(tab==="done"){
-    $("list").innerHTML=`<thead><tr><th>Submitted</th><th>UDISE</th><th>School</th>${user.role==="MASTER"?"<th>District</th>":""}<th>Block</th><th class="n">Works</th><th class="n">Amount (Rs.)</th><th>Painting</th><th class="n">Photos</th><th>JE</th><th></th></tr></thead>
-    <tbody>${rows.length?rows.map(r=>`<tr><td class="nw">${esc(r.at)}</td><td class="nw">${esc(r.udise)}</td><td>${esc(r.name)}</td>${user.role==="MASTER"?`<td>${esc(r.district)}</td>`:""}<td>${esc(r.block)}</td><td class="n">${r.works}</td><td class="n">${inr(r.amount)}</td><td>${r.painting==="Yes"?`Rs. ${inr(r.paintCost)}`:"No"}</td><td class="n">${r.gallery+r.workPhotos}</td><td>${esc(r.je)}</td><td><button class="btn small primary" data-u="${esc(r.udise)}">View</button></td></tr>`).join("")
-      :`<tr><td colspan="11" class="empty">No submitted schools${distFilter||$("aSearch").value?" match the filter":" yet"}.</td></tr>`}</tbody>`;
+    $("list").innerHTML=`<thead><tr><th>Submitted</th><th>UDISE</th><th>School</th>${user.role==="MASTER"?"<th>District</th>":""}<th>Block</th><th class="n">Works</th><th class="n">Amount (Rs.)</th><th class="n">Priority</th><th>Painting</th><th class="n">Photos</th><th>JE</th><th></th></tr></thead>
+    <tbody>${rows.length?rows.map(r=>`<tr><td class="nw">${esc(r.at)}</td><td class="nw">${esc(r.udise)}</td><td>${esc(r.name)}</td>${user.role==="MASTER"?`<td>${esc(r.district)}</td>`:""}<td>${esc(r.block)}</td><td class="n">${r.works}</td><td class="n">${inr(r.amount)}</td><td class="n">${r.priWorks}${r.unmarked?`<div class="sub2">${r.unmarked} not marked</div>`:""}</td><td>${r.painting==="Yes"?`Rs. ${inr(r.paintCost)}`:"No"}</td><td class="n">${r.gallery+r.workPhotos}</td><td>${esc(r.je)}</td><td><button class="btn small primary" data-u="${esc(r.udise)}">View</button></td></tr>`).join("")
+      :`<tr><td colspan="12" class="empty">No submitted schools${distFilter||$("aSearch").value?" match the filter":" yet"}.</td></tr>`}</tbody>`;
     $("list").querySelectorAll("[data-u]").forEach(b=>b.onclick=()=>openSchool(b.dataset.u));
   }else{
     $("list").innerHTML=`<thead><tr><th>UDISE</th><th>School</th>${user.role==="MASTER"?"<th>District</th>":""}<th>Block</th><th>Status</th></tr></thead>
@@ -751,16 +963,39 @@ function renderList(){
 }
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{tab=b.dataset.tab;document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x===b));renderList()});
 $("fDist").onchange=()=>{distFilter=$("fDist").value;renderDash()};
-$("aSearch").oninput=renderList;
+$("aSearch").oninput=renderList;$("fPri").onchange=renderList;
 $("csvBtn").onclick=()=>{
   const rows=filtered();if(!rows.length){toast("Nothing to download.");return}
   const q=v=>`"${String(v??"").replace(/"/g,'""')}"`;
   const lines=tab==="done"
-    ?[["Submitted At","Reference","UDISE","School","District","Block","Works","Works Amount (Rs)","Painting Needed","Painting Cost (Rs)","Gallery Photos","Work Photos","JE","JE Mobile"].join(","),...rows.map(r=>[r.at,r.ref,r.udise,r.name,r.district,r.block,r.works,r.amount,r.painting,r.paintCost,r.gallery,r.workPhotos,r.je,r.mobile].map(q).join(","))]
-    :[["UDISE","School","District","Block","Status"].join(","),...rows.map(r=>[r.udise,r.name,r.district,r.block,"Pending"].map(q).join(","))];
+    ?[["Submitted At","Reference","UDISE","School","District","Block","Category","Works","Works Amount (Rs)","Priority Works","Priority Amount (Rs)","Painting Needed","Painting Cost (Rs)","Gallery Photos","Work Photos","JE","JE Mobile"].join(","),...rows.map(r=>[r.at,r.ref,r.udise,r.name,r.district,r.block,r.category,r.works,r.amount,r.priWorks,r.priAmount,r.painting,r.paintCost,r.gallery,r.workPhotos,r.je,r.mobile].map(q).join(","))]
+    :tab==="pend"?[["UDISE","School","District","Block","Category","Status"].join(","),...rows.map(r=>[r.udise,r.name,r.district,r.block,r.category,"Pending"].map(q).join(","))]
+    :[["Work ID","UDISE","School","District","Block","Category","Proposed Work","Work Area","Amount (Rs)","Priority","Marked By","Marked At"].join(","),...rows.map(w=>[w.workId,w.udise,w.name,w.district,w.block,w.category,w.proposed,w.area,w.amount,w.priority||"Not marked",w.priorityBy,w.priorityAt].map(q).join(","))];
   const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["﻿"+lines.join("\r\n")],{type:"text/csv"}));
-  a.download=`School_Gallery_${tab==="done"?"Submitted":"Pending"}_${(distFilter||(user.role==="MASTER"?"All":user.district)).replace(/\W+/g,"_")}.csv`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+  a.download=`School_Gallery_${tab==="done"?"Submitted":tab==="pend"?"Pending":"Works_Priority"}_${(distFilter||(user.role==="MASTER"?"All":user.district)).replace(/\W+/g,"_")}.csv`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);
 };
+
+/* ---------------- priority (Master marks, District views) ---------------- */
+const priBadge=v=>v==="Priority"?`<span class="st pri">Priority</span>`:v==="Non-priority"?`<span class="st non">Non-priority</span>`:`<span class="st pend">Not marked</span>`;
+const priSelect=w=>`<select class="prisel ${w.priority==="Priority"?"is-pri":w.priority==="Non-priority"?"is-non":""}" data-w="${esc(w.workId)}"><option value="" ${!w.priority?"selected":""}>Not marked</option><option ${w.priority==="Priority"?"selected":""}>Priority</option><option ${w.priority==="Non-priority"?"selected":""}>Non-priority</option></select>`;
+function bindPriSelects(root){
+  root.querySelectorAll("select.prisel").forEach(sel=>sel.onchange=async()=>{
+    const id=sel.dataset.w,val=sel.value;sel.disabled=true;
+    try{const j=await api("setPriority",{workId:id,priority:val});
+      if(!j.ok){toast(j.error);return}
+      const upd=w=>{if(w.workId===id){w.priority=val;w.priorityBy=j.by;w.priorityAt=j.at}};
+      data.works.forEach(upd);curSchool?.works.forEach(upd);
+      // recount per-school figures
+      data.submitted.forEach(r=>{r.priWorks=0;r.priAmount=0;r.nonWorks=0;r.unmarked=0});
+      const byU={};data.submitted.forEach(r=>byU[r.udise]=r);
+      data.works.forEach(w=>{const r=byU[w.udise];if(!r)return;if(w.priority==="Priority"){r.priWorks++;r.priAmount+=w.amount}else if(w.priority==="Non-priority")r.nonWorks++;else r.unmarked++});
+      sel.className=`prisel ${val==="Priority"?"is-pri":val==="Non-priority"?"is-non":""}`;
+      toast(`${id}: ${val||"not marked"}`,1800);
+      if(!$("vDash").hidden)renderDash();
+    }catch(e){if(!e.handled)toast("Could not save. Check the connection.")}
+    finally{sel.disabled=false}
+  });
+}
 
 /* ---------------- school detail with photos ---------------- */
 const imgCache={};
@@ -779,7 +1014,7 @@ async function openSchool(udise){
   show("vSchool");$("sName").textContent="Loading…";["sMeta","sInfo","sResp","sGallery","sWorks","sPills","gCount","wTotal","sMap"].forEach(id=>$(id).innerHTML="");
   let j;try{j=await api("adminSchool",{udise})}catch(e){if(!e.handled)$("sName").textContent="Could not load the school.";return}
   if(!j.ok){$("sName").textContent=j.error;return}
-  const s=j.school,R=j.response;
+  const s=j.school,R=j.response;curSchool=j;$("sDanger").hidden=user.role!=="MASTER";
   $("sName").textContent=s.name;$("sMeta").textContent=`${s.udise} · ${s.district} · ${s.block}`;
   $("sPills").innerHTML=`<span class="pill ok">Submitted ${esc(R["Submitted At"])}</span><span class="pill">Ref ${esc(R["Reference"])}</span>`;
   const box=(l,v,w)=>`<div class="${w?"w2":""}"><small>${esc(l)}</small><b>${esc(v===""||v==null?"—":v)}</b></div>`;
@@ -793,10 +1028,11 @@ async function openSchool(udise){
     return `<figure><button type="button" class="tile ${p?"has":""}" ${p?`data-view="${esc(p.fileId)}"`:"disabled"}>${p?`<img data-f="${esc(p.fileId)}" alt="${esc(l)}"><div class="ov">${geo(p)}</div>`:`<span class="cam"><span>Not captured</span></span>`}</button><figcaption><span><b>${i+1}. ${esc(l)}</b></span></figcaption></figure>`}).join("");
   const wp=j.photos.filter(p=>p.type==="Work");
   $("wTotal").textContent=`${j.works.length} works · Rs. ${inr(j.works.reduce((a,w)=>a+w.amount,0))}`;
-  $("sWorks").innerHTML=j.works.map((w,i)=>`<div class="wcard"><div class="wh"><b>Work ${i+1}<span class="id">${esc(w.workId)}</span></b><b>Rs. ${inr(w.amount)}</b></div>
+  $("sWorks").innerHTML=j.works.map((w,i)=>`<div class="wcard"><div class="wh"><b>Work ${i+1}<span class="id">${esc(w.workId)}</span></b><span class="wpri"><b>Rs. ${inr(w.amount)}</b>${user.role==="MASTER"?priSelect(w):priBadge(w.priority)}</span></div>
     <div class="sd"><div class="w2"><small>Proposed work</small><b style="font-family:var(--f-ta)">${esc(w.proposed)}</b></div><div><small>Work area</small><b>${esc(w.area)}</b></div><div class="w2"><small>Site condition &amp; work required</small><b>${esc(w.site)}</b></div></div>
     <div class="wph-row">${wp.filter(p=>p.item===w.workId).sort((a,b)=>a.n-b.n).map(p=>`<div class="wph"><button type="button" class="tile has" data-view="${esc(p.fileId)}"><img data-f="${esc(p.fileId)}" alt="Before photo ${esc(p.n)}"><div class="ov">${geo(p)}</div></button><span style="font-size:12px;color:var(--muted)">Before photo ${esc(p.n)}</span></div>`).join("")}</div></div>`).join("");
   document.querySelectorAll("#vASchool [data-view]").forEach(b=>b.onclick=()=>viewFull(j.photos.find(p=>p.fileId===b.dataset.view),s));
+  bindPriSelects($("sWorks"));
   fillImages();
 }
 async function viewFull(p,s){
@@ -808,6 +1044,27 @@ async function viewFull(p,s){
   try{const src=await loadImg(p.fileId,"full");$("fullBox").outerHTML=`<img src="${src}" alt="">`}catch(e){$("fullBox").textContent="Could not load the photo."}
 }
 $("aBackBtn").onclick=()=>{show("vDash")};
+$("delBtn").onclick=()=>{
+  const s=curSchool.school;
+  $("dlgT").textContent="Delete this response?";
+  $("dlgB").innerHTML=`<p style="margin:0"><b>${esc(s.name)}</b> (UDISE ${esc(s.udise)}) · ${curSchool.works.length} works · Rs. ${inr(curSchool.works.reduce((a,w)=>a+w.amount,0))}</p>
+    <p style="margin:0;font-size:13px;color:var(--muted)">The JE will be able to submit this school again. This cannot be undone from the page.</p>
+    <label class="f">Reason (saved in the AuditLog)<input id="delReason" placeholder="e.g. wrong photos, JE request"></label>
+    <label class="f">Type the UDISE code <b>${esc(s.udise)}</b> to confirm<input id="delConfirm" inputmode="numeric" autocomplete="off"></label>
+    <div class="lerr" id="delErr"></div>
+    <div style="display:flex;gap:10px"><button class="btn dangerbtn" id="delYes">Delete response</button><button class="btn" id="delNo">Cancel</button></div>`;
+  $("dlg").showModal();
+  $("delNo").onclick=()=>$("dlg").close();
+  $("delYes").onclick=async()=>{
+    if($("delConfirm").value.trim()!==s.udise){$("delErr").textContent="The UDISE code doesn't match.";return}
+    $("delYes").disabled=true;$("delYes").textContent="Deleting…";
+    try{const j=await api("adminDelete",{udise:s.udise,confirm:$("delConfirm").value.trim(),reason:$("delReason").value.trim()});
+      if(!j.ok){$("delErr").textContent=j.error;return}
+      $("dlg").close();toast(`Response for ${s.udise} deleted. The school is pending again.`,4500);loadDash();
+    }catch(e){if(!e.handled)$("delErr").textContent="Could not reach the server."}
+    finally{$("delYes").disabled=false;$("delYes").textContent="Delete response"}
+  };
+};
 
 return {start(t,u){token=t;user=u;distFilter="";loadDash()}};
 })();
