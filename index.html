@@ -283,6 +283,37 @@ section.danger{border-color:#F3C5BF}
 .kpis{grid-template-columns:repeat(8,minmax(0,1fr))}
 @media (max-width:1100px){.kpis{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (max-width:560px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* retake flag */
+.st.rt{background:#FDECEA;color:#B42318;font-weight:600}
+.st.rs{background:#FFF4E5;color:#8A5A00;font-size:11px}
+.banner.rtb{background:#FDF3F2;color:#7A271A;border:1px solid #F3C5BF}
+.kpis b small.rtq{color:#B42318}
+
+/* swipe photo viewer */
+#lb{position:fixed;inset:0;z-index:80;background:#0B1016;color:#fff;display:flex;flex-direction:column}
+.lbtop{display:flex;align-items:center;gap:12px;padding:calc(10px + env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) 10px max(16px,env(safe-area-inset-left))}
+.lbt{flex:1;min-width:0}
+.lbt b{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lbt span{display:block;font-size:12.5px;color:#AEB9C5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:var(--f-ta)}
+#lbCount{font-size:13px;color:#C8D3DF;font-variant-numeric:tabular-nums;white-space:nowrap}
+.lbx{background:rgba(255,255,255,.1);border:0;color:#fff;width:38px;height:38px;border-radius:50%;font-size:16px;cursor:pointer}
+.lbstage{position:relative;flex:1;min-height:0;display:flex;align-items:center;justify-content:center;touch-action:pan-y;outline:none;user-select:none}
+.lbstage img{max-width:100%;max-height:100%;object-fit:contain;transition:filter .2s}
+.lbstage img.ld{filter:blur(2px) brightness(.85)}
+.lbnav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:64px;border:0;background:rgba(255,255,255,.12);color:#fff;font-size:34px;line-height:1;cursor:pointer;border-radius:10px}
+.lbnav.prev{left:max(10px,env(safe-area-inset-left))}.lbnav.next{right:max(10px,env(safe-area-inset-right))}
+.lbnav:hover{background:rgba(255,255,255,.22)}
+@media (max-width:640px){.lbnav{width:38px;height:52px;font-size:28px;background:rgba(0,0,0,.35)}}
+.lbfoot{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;padding:8px max(16px,env(safe-area-inset-right)) 6px max(16px,env(safe-area-inset-left));font-size:12.5px;color:#C8D3DF;font-variant-numeric:tabular-nums}
+.lblinks{display:flex;gap:14px}
+.lblinks a{color:#9CC3F5}
+.lbhint{margin-left:auto;color:#7D8A98;font-size:12px}
+@media (max-width:640px){.lbhint{display:none}}
+.lbstrip{display:flex;gap:6px;overflow-x:auto;padding:6px max(16px,env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+.lbstrip button{flex:none;width:64px;height:48px;border-radius:6px;border:2px solid transparent;padding:0;overflow:hidden;background:#1F2A37;color:#AEB9C5;cursor:pointer;opacity:.6}
+.lbstrip button.on{border-color:#F0B429;opacity:1}
+.lbstrip img{width:100%;height:100%;object-fit:cover;display:block}
 </style>
 </head>
 <body>
@@ -326,6 +357,7 @@ section.danger{border-color:#F3C5BF}
 <main id="vList" hidden>
   <div class="head"><div><div class="meta">Schools in your district</div><h1 id="lDistrict"></h1></div></div>
   <div class="kp"><div><small>Schools</small><b id="kAll">0</b></div><div><small>Submitted</small><b id="kDone">0</b></div><div><small>Pending</small><b id="kPend">0</b></div></div>
+  <div id="rtNote" class="banner rtb" hidden></div>
   <section>
     <div class="filters">
       <input id="fSearch" placeholder="Search school name, UDISE or block">
@@ -428,6 +460,7 @@ section.danger{border-color:#F3C5BF}
     </div>
     <div class="filters">
       <select id="fDist"></select>
+      <select id="fRt" hidden><option value="">All pending</option><option value="rt">Retake requested</option><option value="new">Not started</option></select>
       <select id="fPri" hidden><option value="">All works</option><option>Priority</option><option>Non-priority</option><option value="none">Not marked yet</option></select>
       <input id="aSearch" placeholder="Search school name, UDISE, block, work or JE">
     </div>
@@ -443,12 +476,22 @@ section.danger{border-color:#F3C5BF}
   <section><div class="shead"><h2>A. Photo gallery</h2><div class="r" id="gCount"></div></div><div class="gal" id="sGallery"></div></section>
   <section><div class="shead"><h2>B. Proposed maintenance works</h2><div class="r" id="wTotal"></div></div><div class="wcards" id="sWorks"></div></section>
   <section class="danger" id="sDanger" hidden>
-    <div class="shead"><h2>Delete this response</h2></div>
-    <p class="hint0">Removes this school's submission from Responses, Gallery, Works, Photos and Priority so the JE can submit again. Photos stay in Google Drive. The deletion is recorded in the AuditLog tab.</p>
-    <div><button class="btn dangerbtn" id="delBtn">Delete response…</button></div>
+    <div class="shead"><h2>Send back for retake</h2></div>
+    <p class="hint0">Removes this submission so the JE can capture and submit the school again. The school is flagged <b>Retake requested</b> with your reason, which the JE sees, until it is resubmitted. Old photos stay in Google Drive; the request is recorded in the Retake and AuditLog tabs.</p>
+    <div><button class="btn dangerbtn" id="delBtn">Send back for retake…</button></div>
   </section>
 </main>
 
+<div id="lb" hidden role="dialog" aria-label="Photo viewer">
+  <div class="lbtop"><div class="lbt"><b id="lbTitle"></b><span id="lbGroup"></span></div><span id="lbCount"></span><button class="lbx" id="lbClose" aria-label="Close">✕</button></div>
+  <div class="lbstage" id="lbStage" tabindex="-1">
+    <button class="lbnav prev" id="lbPrev" aria-label="Previous photo">‹</button>
+    <img id="lbImg" alt="" draggable="false">
+    <button class="lbnav next" id="lbNext" aria-label="Next photo">›</button>
+  </div>
+  <div class="lbfoot"><div id="lbGeo"></div><div class="lblinks"><a id="lbMap" target="_blank" rel="noopener">Location on map</a><a id="lbDrive" target="_blank" rel="noopener">Open in Google Drive</a></div><div class="lbhint">Swipe left or right · ← → keys</div></div>
+  <div class="lbstrip" id="lbStrip"></div>
+</div>
 
 
 <script>
@@ -568,17 +611,19 @@ const logout=m=>APP.logout(m);
 let schools=[];
 async function loadList(){
   show("vList");$("lDistrict").textContent=user.district;$("sRows").innerHTML=`<tr><td colspan="5" class="empty" style="padding:22px;text-align:center;color:var(--muted)">Loading schools…</td></tr>`;
-  try{const j=await api("jeSchools");if(!j.ok){toast(j.error);return}schools=j.schools;renderList()}
+  try{const j=await api("jeSchools");if(!j.ok){toast(j.error);return}schools=j.schools.sort((a,b)=>(!!b.retake-!!a.retake));renderList()}
   catch(e){if(!e.handled)$("sRows").innerHTML=`<tr><td colspan="5" style="padding:22px;text-align:center;color:var(--red)">Could not load schools. Check the connection and reload.</td></tr>`}
 }
 function renderList(){
   const q=$("fSearch").value.trim().toLowerCase(),f=$("fStatus").value;
   const done=schools.filter(s=>s.submitted).length;
   $("kAll").textContent=schools.length;$("kDone").textContent=done;$("kPend").textContent=schools.length-done;
+  const rts=schools.filter(s=>s.retake&&!s.submitted).length;
+  $("rtNote").hidden=!rts;$("rtNote").innerHTML=rts?`<b>${rts} school${rts>1?"s":""} sent back for retake.</b> They are listed first. Open each one, read the reason, capture again and submit.`:"";
   const rows=schools.filter(s=>(!q||(s.name||"").toLowerCase().includes(q)||s.udise.includes(q)||(s.block||"").toLowerCase().includes(q))&&(!f||(f==="done")===!!s.submitted));
   $("sRows").innerHTML=rows.length?rows.map(s=>{const d=!s.submitted&&ss.get("spg-draft-"+s.udise);
     return `<tr><td class="u">${esc(s.udise)}</td><td>${esc(s.name)}</td><td>${esc(s.block)}</td>
-      <td>${s.submitted?`<span class="st done">Submitted ${esc(s.submitted.at)}</span>`:d?`<span class="st draft">In progress on this phone</span>`:`<span class="st pend">Pending</span>`}</td>
+      <td>${s.submitted?`<span class="st done">Submitted ${esc(s.submitted.at)}</span>`:s.retake?`<span class="st rt">Retake requested</span><div class="sub2">${esc(s.retake.reason)}</div>`:d?`<span class="st draft">In progress on this phone</span>`:`<span class="st pend">Pending</span>`}</td>
       <td>${s.submitted?`<span style="font-size:12px;color:var(--muted)">${esc(s.submitted.ref)}</span>`:`<button class="btn small primary" data-u="${esc(s.udise)}">${d?"Continue":"Open"}</button>`}</td></tr>`}).join("")
     :`<tr><td colspan="5" style="padding:22px;text-align:center;color:var(--muted)">No school matches.</td></tr>`;
   $("sRows").querySelectorAll("[data-u]").forEach(b=>b.onclick=()=>openSchool(b.dataset.u));
@@ -601,7 +646,7 @@ function saveDraft(){
 }
 
 async function openSchool(udise){
-  show("vSchool");$("schoolName").textContent="Loading…";$("schoolMeta").textContent="";$("sd").innerHTML="";$("formArea").classList.add("disabled");$("blocked").hidden=true;$("errs").hidden=true;
+  show("vSchool");$("schoolName").textContent="Loading…";$("schoolMeta").textContent="";$("sd").innerHTML="";$("formArea").classList.add("disabled");$("blocked").hidden=true;$("blocked").className="banner";$("blocked").style.cssText="";$("errs").hidden=true;
   try{
     const j=await api("school",{udise});
     if(!j.ok){$("schoolName").textContent=j.error;return}
@@ -614,7 +659,9 @@ async function openSchool(udise){
     const F=[["UDISE Code",r.UDISE_Code],["District",r.District],["School Name",r.School_Name],["Latitude",r.Latitute||"—"],["Longitude",r.Longitude||"—"]];
     $("sd").innerHTML=F.map(([l,v])=>`<div><small>${l}</small><b>${esc(v)}</b></div>`).join("");
     $("sdNote").innerHTML=hasGps?`<a target="_blank" rel="noopener" href="https://www.google.com/maps?q=${fence.lat},${fence.lng}">View school location on map</a>`:"School GPS not in database";
-    if(j.submitted){$("blocked").hidden=false;$("blocked").innerHTML=`This school's proposal was already submitted on <b>${esc(j.submitted.at)}</b> (ref ${esc(j.submitted.ref)}). Only one submission is allowed per school.`;return}
+    if(j.retake&&!j.submitted){$("blocked").hidden=false;$("blocked").className="banner rtb";$("blocked").style.cssText="";
+      $("blocked").innerHTML=`<b>Retake requested by the Directorate on ${esc(j.retake.at)}.</b><br>Reason: ${esc(j.retake.reason)}<br>Capture the photos again and submit this school.`}
+    if(j.submitted){$("blocked").hidden=false;$("blocked").className="banner";$("blocked").innerHTML=`This school's proposal was already submitted on <b>${esc(j.submitted.at)}</b> (ref ${esc(j.submitted.ref)}). Only one submission is allowed per school.`;return}
     // building upkeep
     const sel=$("washYear");sel.innerHTML=`<option value="">Select year</option>`+Array.from({length:THIS_YEAR-2009},(_,k)=>THIS_YEAR-k).map(y=>`<option value="${y}">${y}</option>`).join("")+`<option value="before">Before 2010</option>`;
     gallery={};works=[blankWork()];$("paintArea").value="";$("paintCost").value="";
@@ -914,19 +961,19 @@ function renderDash(){
   const works=S.reduce((s,r)=>s+r.works,0),amt=S.reduce((s,r)=>s+r.amount,0),paint=S.reduce((s,r)=>s+r.paintCost,0),photos=S.reduce((s,r)=>s+r.gallery+r.workPhotos,0);
   const pct=d.totalSchools?Math.round(S.length*100/d.totalSchools):0;
   const priW=S.reduce((s,r)=>s+r.priWorks,0),priA=S.reduce((s,r)=>s+r.priAmount,0),unm=S.reduce((s,r)=>s+r.unmarked,0);
-  $("kpis").innerHTML=[["Schools",d.totalSchools],["Submitted",`${S.length} <small>(${pct}%)</small>`],["Pending",P.length],["Proposed works",works],["Works amount (Rs.)",lakh(amt)],["Priority works",`${priW} <small class="q">${unm} not marked</small>`],["Priority amount (Rs.)",lakh(priA)],["Painting cost (Rs.)",lakh(paint)]]
+  $("kpis").innerHTML=[["Schools",d.totalSchools],["Submitted",`${S.length} <small>(${pct}%)</small>`],["Pending",`${P.length}${P.some(r=>r.retake)?` <small class="q rtq">${P.filter(r=>r.retake).length} sent for retake</small>`:""}`],["Proposed works",works],["Works amount (Rs.)",lakh(amt)],["Priority works",`${priW} <small class="q">${unm} not marked</small>`],["Priority amount (Rs.)",lakh(priA)],["Painting cost (Rs.)",lakh(paint)]]
     .map(([l,v])=>`<div><small>${l}</small><b>${v}</b></div>`).join("");
   // abstract
-  const g={};const add=(k)=>g[k]??={k,all:0,done:0,works:0,amt:0,paint:0,ph:0,pw:0,pa:0};
+  const g={};const add=(k)=>g[k]??={k,all:0,done:0,works:0,amt:0,paint:0,ph:0,pw:0,pa:0,rt:0};
   S.forEach(r=>{const x=add(groupKey(r));x.all++;x.done++;x.works+=r.works;x.amt+=r.amount;x.paint+=r.paintCost;x.ph+=r.gallery+r.workPhotos;x.pw+=r.priWorks;x.pa+=r.priAmount});
-  P.forEach(r=>add(groupKey(r)).all++);
+  P.forEach(r=>{const x=add(groupKey(r));x.all++;if(r.retake)x.rt++});
   const rows=Object.values(g).sort((a,b)=>String(a.k).localeCompare(String(b.k)));
-  const T=rows.reduce((a,x)=>({all:a.all+x.all,done:a.done+x.done,works:a.works+x.works,amt:a.amt+x.amt,paint:a.paint+x.paint,ph:a.ph+x.ph,pw:a.pw+x.pw,pa:a.pa+x.pa}),{all:0,done:0,works:0,amt:0,paint:0,ph:0,pw:0,pa:0});
+  const T=rows.reduce((a,x)=>({all:a.all+x.all,done:a.done+x.done,works:a.works+x.works,amt:a.amt+x.amt,paint:a.paint+x.paint,ph:a.ph+x.ph,pw:a.pw+x.pw,pa:a.pa+x.pa,rt:a.rt+x.rt}),{all:0,done:0,works:0,amt:0,paint:0,ph:0,pw:0,pa:0,rt:0});
   $("absTitle").textContent=`${RB_LABEL[reportBy]}-wise abstract`;
   const bar=(d,a)=>{const p=a?Math.round(d*100/a):0;return `<div class="pbar"><i style="width:${p}%"></i></div><span class="pc">${p}%</span>`};
-  $("abs").innerHTML=`<thead><tr><th>${RB_LABEL[reportBy]}</th><th class="n">Schools</th><th class="n">Submitted</th><th class="n">Pending</th><th>Progress</th><th class="n">Works</th><th class="n">Works amount (Rs.)</th><th class="n">Priority works</th><th class="n">Priority amount (Rs.)</th><th class="n">Painting cost (Rs.)</th><th class="n">Photos</th></tr></thead>
-    <tbody>${rows.map(x=>`<tr class="click ${distFilter===x.k?"sel":""}" data-k="${esc(x.k)}"><td>${esc(x.k||"—")}</td><td class="n">${x.all}</td><td class="n">${x.done}</td><td class="n">${x.all-x.done}</td><td class="pg">${bar(x.done,x.all)}</td><td class="n">${x.works}</td><td class="n">${inr(x.amt)}</td><td class="n">${x.pw}</td><td class="n">${inr(x.pa)}</td><td class="n">${inr(x.paint)}</td><td class="n">${x.ph}</td></tr>`).join("")}</tbody>
-    <tfoot><tr><td>Total</td><td class="n">${T.all}</td><td class="n">${T.done}</td><td class="n">${T.all-T.done}</td><td class="pg">${bar(T.done,T.all)}</td><td class="n">${T.works}</td><td class="n">${inr(T.amt)}</td><td class="n">${T.pw}</td><td class="n">${inr(T.pa)}</td><td class="n">${inr(T.paint)}</td><td class="n">${T.ph}</td></tr></tfoot>`;
+  $("abs").innerHTML=`<thead><tr><th>${RB_LABEL[reportBy]}</th><th class="n">Schools</th><th class="n">Submitted</th><th class="n">Pending</th><th class="n">Retake</th><th>Progress</th><th class="n">Works</th><th class="n">Works amount (Rs.)</th><th class="n">Priority works</th><th class="n">Priority amount (Rs.)</th><th class="n">Painting cost (Rs.)</th><th class="n">Photos</th></tr></thead>
+    <tbody>${rows.map(x=>`<tr class="click ${distFilter===x.k?"sel":""}" data-k="${esc(x.k)}"><td>${esc(x.k||"—")}</td><td class="n">${x.all}</td><td class="n">${x.done}</td><td class="n">${x.all-x.done}</td><td class="n">${x.rt||""}</td><td class="pg">${bar(x.done,x.all)}</td><td class="n">${x.works}</td><td class="n">${inr(x.amt)}</td><td class="n">${x.pw}</td><td class="n">${inr(x.pa)}</td><td class="n">${inr(x.paint)}</td><td class="n">${x.ph}</td></tr>`).join("")}</tbody>
+    <tfoot><tr><td>Total</td><td class="n">${T.all}</td><td class="n">${T.done}</td><td class="n">${T.all-T.done}</td><td class="n">${T.rt||""}</td><td class="pg">${bar(T.done,T.all)}</td><td class="n">${T.works}</td><td class="n">${inr(T.amt)}</td><td class="n">${T.pw}</td><td class="n">${inr(T.pa)}</td><td class="n">${inr(T.paint)}</td><td class="n">${T.ph}</td></tr></tfoot>`;
   $("abs").querySelectorAll("tr[data-k]").forEach(tr=>tr.onclick=()=>{distFilter=distFilter===tr.dataset.k?"":tr.dataset.k;$("fDist").value=distFilter;renderDash()});
   renderList();
 }
@@ -935,12 +982,13 @@ function filtered(){
   const src=tab==="done"?data.submitted:tab==="pend"?data.pending:data.works;
   const pf=$("fPri").value;
   return src.filter(r=>(!distFilter||groupKey(r)===distFilter)&&(!q||[r.name,r.udise,r.block,r.je,r.workId,r.proposed,r.area].some(v=>String(v||"").toLowerCase().includes(q)))
-    &&(tab!=="works"||!pf||(pf==="none"?!r.priority:r.priority===pf)));
+    &&(tab!=="works"||!pf||(pf==="none"?!r.priority:r.priority===pf))
+    &&(tab!=="pend"||!$("fRt").value||($("fRt").value==="rt")===!!r.retake));
 }
 function renderList(){
   const rows=filtered();
   $("tDone").textContent=`Submitted (${data.submitted.length})`;$("tPend").textContent=`Pending (${data.pending.length})`;$("tWorks").textContent=`Works & priority (${data.works.length})`;
-  $("fPri").hidden=tab!=="works";
+  $("fPri").hidden=tab!=="works";$("fRt").hidden=tab!=="pend";
   const M=user.role==="MASTER";
   if(tab==="works"){
     $("list").innerHTML=`<thead><tr><th>Work ID</th><th>School</th>${M?"<th>District</th>":""}<th>Block</th><th>Category</th><th>Proposed work</th><th>Work area</th><th class="n">Amount (Rs.)</th><th>Priority</th></tr></thead>
@@ -952,24 +1000,24 @@ function renderList(){
   }
   if(tab==="done"){
     $("list").innerHTML=`<thead><tr><th>Submitted</th><th>UDISE</th><th>School</th>${user.role==="MASTER"?"<th>District</th>":""}<th>Block</th><th class="n">Works</th><th class="n">Amount (Rs.)</th><th class="n">Priority</th><th>Painting</th><th class="n">Photos</th><th>JE</th><th></th></tr></thead>
-    <tbody>${rows.length?rows.map(r=>`<tr><td class="nw">${esc(r.at)}</td><td class="nw">${esc(r.udise)}</td><td>${esc(r.name)}</td>${user.role==="MASTER"?`<td>${esc(r.district)}</td>`:""}<td>${esc(r.block)}</td><td class="n">${r.works}</td><td class="n">${inr(r.amount)}</td><td class="n">${r.priWorks}${r.unmarked?`<div class="sub2">${r.unmarked} not marked</div>`:""}</td><td>${r.painting==="Yes"?`Rs. ${inr(r.paintCost)}`:"No"}</td><td class="n">${r.gallery+r.workPhotos}</td><td>${esc(r.je)}</td><td><button class="btn small primary" data-u="${esc(r.udise)}">View</button></td></tr>`).join("")
+    <tbody>${rows.length?rows.map(r=>`<tr><td class="nw">${esc(r.at)}</td><td class="nw">${esc(r.udise)}</td><td>${esc(r.name)}</td>${user.role==="MASTER"?`<td>${esc(r.district)}</td>`:""}<td>${esc(r.block)}${r.resubmitted?`<div><span class="st rs" title="${esc(r.resubmitted.reason)}">Resubmitted after retake</span></div>`:""}</td><td class="n">${r.works}</td><td class="n">${inr(r.amount)}</td><td class="n">${r.priWorks}${r.unmarked?`<div class="sub2">${r.unmarked} not marked</div>`:""}</td><td>${r.painting==="Yes"?`Rs. ${inr(r.paintCost)}`:"No"}</td><td class="n">${r.gallery+r.workPhotos}</td><td>${esc(r.je)}</td><td><button class="btn small primary" data-u="${esc(r.udise)}">View</button></td></tr>`).join("")
       :`<tr><td colspan="12" class="empty">No submitted schools${distFilter||$("aSearch").value?" match the filter":" yet"}.</td></tr>`}</tbody>`;
     $("list").querySelectorAll("[data-u]").forEach(b=>b.onclick=()=>openSchool(b.dataset.u));
   }else{
     $("list").innerHTML=`<thead><tr><th>UDISE</th><th>School</th>${user.role==="MASTER"?"<th>District</th>":""}<th>Block</th><th>Status</th></tr></thead>
-    <tbody>${rows.length?rows.map(r=>`<tr><td class="nw">${esc(r.udise)}</td><td>${esc(r.name)}</td>${user.role==="MASTER"?`<td>${esc(r.district)}</td>`:""}<td>${esc(r.block)}</td><td><span class="st pend">Pending</span></td></tr>`).join("")
+    <tbody>${rows.length?rows.map(r=>`<tr><td class="nw">${esc(r.udise)}</td><td>${esc(r.name)}</td>${user.role==="MASTER"?`<td>${esc(r.district)}</td>`:""}<td>${esc(r.block)}</td><td>${r.retake?`<span class="st rt">Retake requested</span><div class="sub2">${esc(r.retake.reason)} · ${esc(r.retake.at)}</div>`:`<span class="st pend">Not started</span>`}</td></tr>`).join("")
       :`<tr><td colspan="5" class="empty">No pending schools${distFilter||$("aSearch").value?" match the filter":""}.</td></tr>`}</tbody>`;
   }
 }
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{tab=b.dataset.tab;document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("on",x===b));renderList()});
 $("fDist").onchange=()=>{distFilter=$("fDist").value;renderDash()};
-$("aSearch").oninput=renderList;$("fPri").onchange=renderList;
+$("aSearch").oninput=renderList;$("fPri").onchange=renderList;$("fRt").onchange=renderList;
 $("csvBtn").onclick=()=>{
   const rows=filtered();if(!rows.length){toast("Nothing to download.");return}
   const q=v=>`"${String(v??"").replace(/"/g,'""')}"`;
   const lines=tab==="done"
     ?[["Submitted At","Reference","UDISE","School","District","Block","Category","Works","Works Amount (Rs)","Priority Works","Priority Amount (Rs)","Painting Needed","Painting Cost (Rs)","Gallery Photos","Work Photos","JE","JE Mobile"].join(","),...rows.map(r=>[r.at,r.ref,r.udise,r.name,r.district,r.block,r.category,r.works,r.amount,r.priWorks,r.priAmount,r.painting,r.paintCost,r.gallery,r.workPhotos,r.je,r.mobile].map(q).join(","))]
-    :tab==="pend"?[["UDISE","School","District","Block","Category","Status"].join(","),...rows.map(r=>[r.udise,r.name,r.district,r.block,r.category,"Pending"].map(q).join(","))]
+    :tab==="pend"?[["UDISE","School","District","Block","Category","Status","Retake Reason","Retake Requested At"].join(","),...rows.map(r=>[r.udise,r.name,r.district,r.block,r.category,r.retake?"Retake requested":"Not started",r.retake?.reason,r.retake?.at].map(q).join(","))]
     :[["Work ID","UDISE","School","District","Block","Category","Proposed Work","Work Area","Amount (Rs)","Priority","Marked By","Marked At"].join(","),...rows.map(w=>[w.workId,w.udise,w.name,w.district,w.block,w.category,w.proposed,w.area,w.amount,w.priority||"Not marked",w.priorityBy,w.priorityAt].map(q).join(","))];
   const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["﻿"+lines.join("\r\n")],{type:"text/csv"}));
   a.download=`School_Gallery_${tab==="done"?"Submitted":tab==="pend"?"Pending":"Works_Priority"}_${(distFilter||(user.role==="MASTER"?"All":user.district)).replace(/\W+/g,"_")}.csv`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);
@@ -1009,14 +1057,15 @@ async function fillImages(){
   const worker=async()=>{while(q.length){const im=q.shift();try{im.src=await loadImg(im.dataset.f,"thumb")}catch(e){im.alt="Could not load";im.closest(".tile")?.classList.add("err")}}};
   await Promise.all([worker(),worker(),worker()]);
 }
-const geo=p=>`${(+p.lat).toFixed(6)}, ${(+p.lng).toFixed(6)} · ±${esc(p.acc)} m<br>${esc(p.dist)} m from school · ${esc(String(p.capturedAt).replace("T"," "))}`;
+const geo=p=>`${(+p.lat).toFixed(6)}, ${(+p.lng).toFixed(6)} · ±${esc(p.acc)} m<br>${esc(p.dist)} m from school · ${esc(String(p.capturedAt).replace(/^(\d{4}-\d{2}-\d{2})T/,"$1 "))}`;
 async function openSchool(udise){
   show("vSchool");$("sName").textContent="Loading…";["sMeta","sInfo","sResp","sGallery","sWorks","sPills","gCount","wTotal","sMap"].forEach(id=>$(id).innerHTML="");
   let j;try{j=await api("adminSchool",{udise})}catch(e){if(!e.handled)$("sName").textContent="Could not load the school.";return}
   if(!j.ok){$("sName").textContent=j.error;return}
   const s=j.school,R=j.response;curSchool=j;$("sDanger").hidden=user.role!=="MASTER";
   $("sName").textContent=s.name;$("sMeta").textContent=`${s.udise} · ${s.district} · ${s.block}`;
-  $("sPills").innerHTML=`<span class="pill ok">Submitted ${esc(R["Submitted At"])}</span><span class="pill">Ref ${esc(R["Reference"])}</span>`;
+  const rsx=data?.submitted.find(x=>x.udise===s.udise)?.resubmitted;
+  $("sPills").innerHTML=`<span class="pill ok">Submitted ${esc(R["Submitted At"])}</span><span class="pill">Ref ${esc(R["Reference"])}</span>${rsx?`<span class="pill am" title="${esc(rsx.reason)}">Resubmitted after retake</span>`:""}`;
   const box=(l,v,w)=>`<div class="${w?"w2":""}"><small>${esc(l)}</small><b>${esc(v===""||v==null?"—":v)}</b></div>`;
   $("sInfo").innerHTML=box("UDISE Code",s.udise)+box("District",s.district)+box("School Name",s.name)+box("Latitude",s.lat)+box("Longitude",s.lng);
   if(s.lat&&s.lng)$("sMap").innerHTML=`<a target="_blank" rel="noopener" href="https://www.google.com/maps?q=${+s.lat},${+s.lng}">View school location on map</a>`;
@@ -1031,38 +1080,68 @@ async function openSchool(udise){
   $("sWorks").innerHTML=j.works.map((w,i)=>`<div class="wcard"><div class="wh"><b>Work ${i+1}<span class="id">${esc(w.workId)}</span></b><span class="wpri"><b>Rs. ${inr(w.amount)}</b>${user.role==="MASTER"?priSelect(w):priBadge(w.priority)}</span></div>
     <div class="sd"><div class="w2"><small>Proposed work</small><b style="font-family:var(--f-ta)">${esc(w.proposed)}</b></div><div><small>Work area</small><b>${esc(w.area)}</b></div><div class="w2"><small>Site condition &amp; work required</small><b>${esc(w.site)}</b></div></div>
     <div class="wph-row">${wp.filter(p=>p.item===w.workId).sort((a,b)=>a.n-b.n).map(p=>`<div class="wph"><button type="button" class="tile has" data-view="${esc(p.fileId)}"><img data-f="${esc(p.fileId)}" alt="Before photo ${esc(p.n)}"><div class="ov">${geo(p)}</div></button><span style="font-size:12px;color:var(--muted)">Before photo ${esc(p.n)}</span></div>`).join("")}</div></div>`).join("");
-  document.querySelectorAll("#vASchool [data-view]").forEach(b=>b.onclick=()=>viewFull(j.photos.find(p=>p.fileId===b.dataset.view),s));
+  // one ordered list of every photo: gallery slots 1-10, then each work's before photos
+  const seq=[];
+  GALLERY.forEach((l,i)=>{const p=gp.find(x=>String(x.item).startsWith((i+1)+". "));if(p)seq.push({...p,title:`Gallery ${i+1}. ${l}`,group:"A. Photo gallery"})});
+  j.works.forEach((w,i)=>wp.filter(p=>p.item===w.workId).sort((a,b)=>a.n-b.n).forEach(p=>seq.push({...p,title:`Work ${i+1} · before photo ${p.n} of ${wp.filter(x=>x.item===w.workId).length}`,group:`${w.workId} · ${w.proposed}`})));
+  document.querySelectorAll("#vASchool [data-view]").forEach(b=>b.onclick=()=>LB.open(seq,seq.findIndex(p=>p.fileId===b.dataset.view),s));
   bindPriSelects($("sWorks"));
   fillImages();
 }
-async function viewFull(p,s){
-  $("dlgT").textContent=p.type==="Gallery"?`${s.name} · ${p.item}`:`${p.item} · before photo ${p.n}`;
-  $("dlgB").innerHTML=`<div style="aspect-ratio:4/3;background:var(--tile);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted)" id="fullBox">Loading photo…</div>
-    <div style="font-size:12.5px;color:var(--muted)">${geo(p)}</div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn small" style="text-decoration:none" target="_blank" rel="noopener" href="https://www.google.com/maps?q=${+p.lat},${+p.lng}">Photo location on map</a><a class="btn small" style="text-decoration:none" target="_blank" rel="noopener" href="${esc(p.link)}">Open in Google Drive</a></div>`;
-  $("dlg").showModal();
-  try{const src=await loadImg(p.fileId,"full");$("fullBox").outerHTML=`<img src="${src}" alt="">`}catch(e){$("fullBox").textContent="Could not load the photo."}
-}
+/* ---------------- swipe photo viewer ---------------- */
+const LB=(()=>{
+  let seq=[],i=0,school=null,x0=null,y0=null;
+  const el=()=>$("lb");
+  function open(list,start,s){seq=list;school=s;i=Math.max(0,start);el().hidden=false;document.body.style.overflow="hidden";render();$("lbStage").focus()}
+  function close(){el().hidden=true;document.body.style.overflow=""}
+  function go(d){if(!seq.length)return;i=(i+d+seq.length)%seq.length;render()}
+  async function render(){
+    const p=seq[i],k=i;
+    $("lbCount").textContent=`${i+1} / ${seq.length}`;$("lbTitle").textContent=p.title;$("lbGroup").textContent=p.group;
+    $("lbGeo").innerHTML=geo(p);
+    $("lbMap").href=`https://www.google.com/maps?q=${+p.lat},${+p.lng}`;$("lbDrive").href=p.link;
+    const img=$("lbImg");img.classList.add("ld");
+    const th=imgCache[p.fileId+":thumb"];img.src=th||"";img.alt=p.title;
+    $("lbStrip").innerHTML=seq.map((q,n)=>`<button type="button" class="${n===i?"on":""}" data-n="${n}" aria-label="${esc(q.title)}">${imgCache[q.fileId+":thumb"]?`<img src="${imgCache[q.fileId+":thumb"]}" alt="">`:`<span>${n+1}</span>`}</button>`).join("");
+    $("lbStrip").querySelectorAll("[data-n]").forEach(b=>b.onclick=()=>{i=+b.dataset.n;render()});
+    $("lbStrip").querySelector(".on")?.scrollIntoView({block:"nearest",inline:"center"});
+    try{const src=await loadImg(p.fileId,"full");if(k===i){img.src=src;img.classList.remove("ld")}}catch(e){if(k===i)$("lbGeo").innerHTML+=`<br><b style="color:#ffb3aa">Could not load the full photo.</b>`}
+    [1,-1].forEach(d=>{const q=seq[(i+d+seq.length)%seq.length];if(q)loadImg(q.fileId,"full").catch(()=>{})});   // preload neighbours
+  }
+  document.addEventListener("keydown",e=>{if(el().hidden)return;if(e.key==="ArrowRight")go(1);else if(e.key==="ArrowLeft")go(-1);else if(e.key==="Escape")close()});
+  const stage=()=>$("lbStage");
+  window.addEventListener("load",()=>{});
+  function bind(){
+    $("lbClose").onclick=close;$("lbPrev").onclick=()=>go(-1);$("lbNext").onclick=()=>go(1);
+    stage().addEventListener("pointerdown",e=>{x0=e.clientX;y0=e.clientY});
+    stage().addEventListener("pointerup",e=>{if(x0==null)return;const dx=e.clientX-x0,dy=e.clientY-y0;x0=null;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy))go(dx<0?1:-1)});
+    stage().addEventListener("touchstart",e=>{x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
+    stage().addEventListener("touchend",e=>{if(x0==null)return;const t=e.changedTouches[0],dx=t.clientX-x0,dy=t.clientY-y0;x0=null;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy))go(dx<0?1:-1)},{passive:true});
+  }
+  bind();
+  return {open,close};
+})();
 $("aBackBtn").onclick=()=>{show("vDash")};
 $("delBtn").onclick=()=>{
   const s=curSchool.school;
-  $("dlgT").textContent="Delete this response?";
+  $("dlgT").textContent="Send back for retake?";
   $("dlgB").innerHTML=`<p style="margin:0"><b>${esc(s.name)}</b> (UDISE ${esc(s.udise)}) · ${curSchool.works.length} works · Rs. ${inr(curSchool.works.reduce((a,w)=>a+w.amount,0))}</p>
-    <p style="margin:0;font-size:13px;color:var(--muted)">The JE will be able to submit this school again. This cannot be undone from the page.</p>
-    <label class="f">Reason (saved in the AuditLog)<input id="delReason" placeholder="e.g. wrong photos, JE request"></label>
+    <p style="margin:0;font-size:13px;color:var(--muted)">This submission will be removed and the JE must capture the school again. This cannot be undone from the page.</p>
+    <label class="f">Reason for retake (the JE will see this) *<input id="delReason" placeholder="e.g. Classroom photo is blurred; toilet work photos missing"></label>
     <label class="f">Type the UDISE code <b>${esc(s.udise)}</b> to confirm<input id="delConfirm" inputmode="numeric" autocomplete="off"></label>
     <div class="lerr" id="delErr"></div>
-    <div style="display:flex;gap:10px"><button class="btn dangerbtn" id="delYes">Delete response</button><button class="btn" id="delNo">Cancel</button></div>`;
+    <div style="display:flex;gap:10px"><button class="btn dangerbtn" id="delYes">Send back for retake</button><button class="btn" id="delNo">Cancel</button></div>`;
   $("dlg").showModal();
   $("delNo").onclick=()=>$("dlg").close();
   $("delYes").onclick=async()=>{
+    if($("delReason").value.trim().length<3){$("delErr").textContent="Write the reason for the retake.";return}
     if($("delConfirm").value.trim()!==s.udise){$("delErr").textContent="The UDISE code doesn't match.";return}
-    $("delYes").disabled=true;$("delYes").textContent="Deleting…";
+    $("delYes").disabled=true;$("delYes").textContent="Sending…";
     try{const j=await api("adminDelete",{udise:s.udise,confirm:$("delConfirm").value.trim(),reason:$("delReason").value.trim()});
       if(!j.ok){$("delErr").textContent=j.error;return}
-      $("dlg").close();toast(`Response for ${s.udise} deleted. The school is pending again.`,4500);loadDash();
+      $("dlg").close();toast(`${s.udise} sent back for retake. It shows as "Retake requested" until the JE resubmits.`,5000);tab="pend";document.querySelectorAll("#listTabs .tab").forEach(x=>x.classList.toggle("on",x.dataset.tab==="pend"));loadDash();
     }catch(e){if(!e.handled)$("delErr").textContent="Could not reach the server."}
-    finally{$("delYes").disabled=false;$("delYes").textContent="Delete response"}
+    finally{$("delYes").disabled=false;$("delYes").textContent="Send back for retake"}
   };
 };
 
