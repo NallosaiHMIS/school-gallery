@@ -476,7 +476,7 @@ const APP=(()=>{
     $("dlgT").textContent="Change password";
     $("dlgB").innerHTML=`<form class="pwgrid" id="pwForm">
         <label class="f">Current password<input id="pwOld" type="password" autocomplete="current-password"></label>
-        <label class="f">New password (at least 8 characters, letters and numbers)<input id="pwNew" type="password" autocomplete="new-password"></label>
+        <label class="f">New password (at least 6 characters, no spaces)<input id="pwNew" type="password" autocomplete="new-password"></label>
         <label class="f">Type the new password again<input id="pwNew2" type="password" autocomplete="new-password"></label>
         <div class="lerr" id="pwErr"></div><div class="okmsg" id="pwOk"></div>
         <div><button class="btn primary" type="submit">Change my password</button></div></form>
